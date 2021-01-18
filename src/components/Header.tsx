@@ -8,7 +8,7 @@ const Header = () => {
     href: String;
   }
   // Temporary hard code currentUser until Auth server is set up
-  const currentUser = true;
+  const currentUser = false;
   const links: JSX.Element[] = [
     // Render links selectively based on user sessions status
     currentUser
@@ -31,9 +31,11 @@ const Header = () => {
     ));
 
   return (
-    <nav className='navbar navbar-light bg-light'>
+    <nav className='navbar navbar-light bg-light w-100'>
       <Link to='/'>
-        <a className='navbar-brand'>The Dough Boys</a>
+        <a className='navbar-brand'>
+          <h1 id='brand'>The Dough Boys</h1>
+        </a>
       </Link>
 
       <div className='d-flex justify-content-end'>

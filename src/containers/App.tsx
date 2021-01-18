@@ -13,30 +13,34 @@ import Register from '../containers/Register';
 const App = () => {
   console.log('app ');
   return (
-    <div className='container fluid d-flex flex-column'>
+    <div className='main d-flex align-items-start flex-column'>
       <Router>
         <Header />
-        <Switch>
-          <Route path='/about'>
-            <About />
-          </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/contact'>
-            <Contact />
-          </Route>
-          <Route path='/register'>
-            <Register />
-          </Route>
-          <Route path='/account'>
-            <Account />
-          </Route>
-          <Route path='/'>
-            <Main />
-          </Route>
-        </Switch>
-        <Footer />
+        <div className='d-flex w-100 align-content-center'>
+          <Switch>
+            <Route path='/about'>
+              <About />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/contact'>
+              <Contact />
+            </Route>
+            <Route path='/register'>
+              <Register />
+            </Route>
+            <Route path='/account'>
+              <Account />
+            </Route>
+            <Route path='/'>
+              <Main />
+            </Route>
+          </Switch>
+        </div>
+        <div className='container-fluid mt-auto p-2'>
+          <Footer />
+        </div>
       </Router>
     </div>
   );

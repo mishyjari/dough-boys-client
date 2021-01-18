@@ -1,9 +1,15 @@
 import React from 'react';
+import LoginForm from '../components/LoginForm';
 
 const Login = () => {
   return (
-    <div>
-      <h3>Login</h3>
+    <div className='card m-auto'>
+      <div className='card-body'>
+        <h3 className='card-title'>Login</h3>
+        <div className='card-text'>
+          <LoginForm />
+        </div>
+      </div>
     </div>
   );
 };
