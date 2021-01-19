@@ -8,7 +8,7 @@ const Header = () => {
     href: String;
   }
   // Temporary hard code currentUser until Auth server is set up
-  const currentUser = false;
+  const currentUser = true;
   const links: JSX.Element[] = [
     // Render links selectively based on user sessions status
     currentUser
