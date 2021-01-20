@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const RegisterForm = () => {
   const [email, setEmail] = useState('');
@@ -6,17 +7,16 @@ const RegisterForm = () => {
   const [contactPerson, setContactPerson] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [addressLineOne, setAddressLineOne] = useState('');
-  const [addressLineTwo, setaddressLineTwo] = useState('');
+  const [addressLineTwo, setAddressLineTwo] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(
-      'Register submit',
+    const user = {
       email,
       companyName,
       contactPerson,
@@ -28,7 +28,14 @@ const RegisterForm = () => {
       zip,
       password,
       confirmPassword
-    );
+    };
+
+    const res = await axios.post('/api/users/signup', user);
+
+    console.log('POST request sent');
+    console.log('Status ' + res.status);
+    console.log('Response Object:')
+    console.log(res)
   };
 
   const states = [
@@ -123,7 +130,7 @@ const RegisterForm = () => {
           placeholder='Your Company Name'
           className='form-control'
           value={companyName}
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => setCompanyName(e.target.value)}
         />
       </div>
       <div className='form-group'>
@@ -154,7 +161,7 @@ const RegisterForm = () => {
           required={true}
           className='form-control'
           value={addressLineOne}
-          onChange={e => setContactPhone(e.target.value)}
+          onChange={e => setAddressLineOne(e.target.value)}
         />
       </div>
       <div className='form-group'>
@@ -164,7 +171,7 @@ const RegisterForm = () => {
           required={true}
           className='form-control'
           value={addressLineTwo}
-          onChange={e => setContactPhone(e.target.value)}
+          onChange={e => setAddressLineTwo(e.target.value)}
         />
       </div>
       <div className='form-row'>

@@ -1,79 +1,60 @@
 import React from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 import OrderForm from "../components/OrderForm";
-import LoginForm from "../components/LoginForm";
+import ShowOrders from "./ShowOrders";
+
+const accountPages = [
+    {
+        label: 'New Order',
+        href: '/account/new-order',
+        component: <OrderForm />
+    },
+    {
+        label: 'View Orders',
+        href: '/account/orders',
+        component: <ShowOrders />
+    },
+    {
+        label: 'Invoicing',
+        href: '/account/invoicing'
+    },
+    {
+        label: 'Account Details',
+        href: '/account/details'
+    }
+]
 
 const Account = () => {
-  return (
-    <div className='container-fluid'>
+
+    return (
+    <div className='container-fluid red'>
         <div className={'row justify-content-center'}>
                 <h3>My Account</h3>
         </div>
-        <div className={'row justify-content-center'}>
-            <div className={'col-4 d-flex justify-content-center'}>
-                <div className='card m-auto w-100'>
-                    <div className='card-body'>
-                        <h5 className='card-title'>Place New Order</h5>
-                        <div className='card-text'>
-                            <OrderForm />
-                        </div>
-                    </div>
+        <div className={'row fluid red'}>
+            <div className={'col col-2 red'}>
+                <div className="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {
+                    accountPages.map(({label, href}) => {
+                        return <Link to={href}>
+                            {label}
+                        </Link>
+                    })
+                }
                 </div>
             </div>
-            <div className={'col-4'}>
-                <div className={'row'}>
-                    <div className='card m-auto w-100'>
-                        <div className='card-body'>
-                            <h5 className='card-title'>Active Orders</h5>
-                            <div className='card-text'>
-                                <ul>
-                                    <li>Example</li>
-                                    <li>Example</li>
-                                    <li>Example</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={'row'}>
-                    <div className='card m-auto w-100'>
-                        <div className='card-body'>
-                            <h5 className='card-title'>Past Orders</h5>
-                            <div className='card-text'>
-                                <ul>
-                                    <li>Example</li>
-                                    <li>Example</li>
-                                    <li>Example</li>
-                                </ul>
-                                <a href={"#"}>...more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className={'col-4'}>
-                <div className={'row'}>
-                    <div className='card m-auto w-100'>
-                        <div className='card-body'>
-                            <h5 className='card-title'>Invoices</h5>
-                            <div className='card-text'>
-                                Invoices go here
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={'row'}>
-                    <div className='card m-auto w-100'>
-                        <div className='card-body'>
-                            <h5 className='card-title'>Pay Invoice</h5>
-                            <div className='card-text'>
-                                Payment portal goes here
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className={'col col-10'}>
+            <Switch>
+                {
+                    accountPages.map(({label, href, component}) => {
+                        return <Route path={href}>
+                            {component || label}
+                        </Route>
+                })
+                }
+            </Switch>
             </div>
         </div>
-
     </div>
   );
 };

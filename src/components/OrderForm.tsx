@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from "axios";
 
 const OrderForm = () => {
     const initialDate = () => {
@@ -17,11 +18,29 @@ const OrderForm = () => {
     const [qtyLarge, setQtyLarge] = useState(0);
     const [memo, setMemo] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Submitted', date, qtySmall, qtyMedium, qtyLarge, memo);
+
+        const order = {
+            date,
+            qtySmall,
+            qtyMedium,
+            qtyLarge,
+            memo,
+            userId: '1234'
+        }
+
+        const res = await axios.post(
+            '/api/orders',
+            order
+        );
+
+        console.log('POST request sent');
+        console.log('Status ' + res.status);
+        console.log('Response Object:')
+        console.log(res)
+
     }
-    console.log(date)
 
     return (
         <form onSubmit={handleSubmit}>
